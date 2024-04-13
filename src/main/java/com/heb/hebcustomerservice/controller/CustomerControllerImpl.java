@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -30,19 +27,25 @@ public class CustomerControllerImpl implements CustomerController {
 
     @Override
     @GetMapping(
-            value="/{city}",
+            value="/city/{cityName}",
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<List<Customer>> findCustomerByCity(@PathVariable String city) {
-        return ResponseEntity.ok(customerService.findCustomerByCity(city));
+    public ResponseEntity<List<Customer>> findCustomerByCity(@PathVariable String cityName) {
+        return ResponseEntity.ok(customerService.findCustomerByCity(cityName));
     }
 
     @Override
-    public ResponseEntity findCustomerById(UUID cusomerId) {
-        return null;
+    @GetMapping(
+            value="/{customerId}",
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<Customer> findCustomerById(@PathVariable UUID customerId) {
+        return ResponseEntity.ok(customerService.findCustomerById(customerId));
     }
 
     @Override
-    public ResponseEntity createCustomer(Customer customer) {
-        return null;
+    @PostMapping(
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
+        return ResponseEntity.ok(customerService.createCustomer(customer));
     }
 }
