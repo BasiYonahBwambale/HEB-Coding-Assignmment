@@ -25,7 +25,7 @@ private CustomerServiceImpl(CustomerRepository customerRepository){
 
     @Override
     public Customer findCustomerById(UUID customerId) {
-        return null;
+        return customerRepository.findById(customerId).get();
     }
 
     @Override
