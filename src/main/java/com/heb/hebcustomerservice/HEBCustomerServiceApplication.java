@@ -4,10 +4,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HebcustomerserviceApplication {
+public class HEBCustomerServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HebcustomerserviceApplication.class, args);
+		SpringApplication.run(HEBCustomerServiceApplication.class, args);
 	}
 
 }
+
