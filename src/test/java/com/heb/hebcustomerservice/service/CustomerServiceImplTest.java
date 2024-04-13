@@ -61,5 +61,7 @@ class CustomerServiceImplTest {
 
     @Test
     void createCustomer() {
+        when(customerRepository.save(customer)).thenReturn(customer);
+        assertEquals(customer, customerService.createCustomer(customer));
     }
 }
