@@ -52,7 +52,7 @@ class CustomerControllerImplTest {
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .accept(MediaType.APPLICATION_JSON)
                 ).andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().json(objectMapper.writeValueAsString(customer)))
+                .andExpect(MockMvcResultMatchers.content().json(objectMapper.writeValueAsString(List.of(customer))))
                 .andReturn();
     }
 
