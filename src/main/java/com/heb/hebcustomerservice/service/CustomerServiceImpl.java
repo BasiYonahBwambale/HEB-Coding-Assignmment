@@ -1,6 +1,7 @@
 package com.heb.hebcustomerservice.service;
 
 import com.heb.hebcustomerservice.entity.Customer;
+import com.heb.hebcustomerservice.exception.CustomerNotFoundException;
 import com.heb.hebcustomerservice.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +24,9 @@ private CustomerServiceImpl(CustomerRepository customerRepository){
     }
 
     @Override
-    public Customer findCustomerById(UUID customerId) {
-        return customerRepository.findById(customerId).get();
+    public Customer findCustomerById(UUID customerId) throws CustomerNotFoundException {
+        return customerRepository.findById(customerId)
+                .orElseThrow(() -> new CustomerNotFoundException("Customer with ID " + customerId + " Not Found"));
     }
 
     @Override

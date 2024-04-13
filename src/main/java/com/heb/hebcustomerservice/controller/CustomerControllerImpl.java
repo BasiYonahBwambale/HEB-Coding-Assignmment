@@ -1,9 +1,9 @@
 package com.heb.hebcustomerservice.controller;
 
 import com.heb.hebcustomerservice.entity.Customer;
+import com.heb.hebcustomerservice.exception.CustomerNotFoundException;
 import com.heb.hebcustomerservice.service.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +37,7 @@ public class CustomerControllerImpl implements CustomerController {
     @GetMapping(
             value="/{customerId}",
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Customer> findCustomerById(@PathVariable UUID customerId) {
+    public ResponseEntity<Customer> findCustomerById(@PathVariable UUID customerId) throws CustomerNotFoundException {
         return ResponseEntity.ok(customerService.findCustomerById(customerId));
     }
 

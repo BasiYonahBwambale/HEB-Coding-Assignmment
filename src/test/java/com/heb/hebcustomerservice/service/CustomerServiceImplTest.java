@@ -1,6 +1,7 @@
 package com.heb.hebcustomerservice.service;
 
 import com.heb.hebcustomerservice.entity.Customer;
+import com.heb.hebcustomerservice.exception.CustomerNotFoundException;
 import com.heb.hebcustomerservice.repository.CustomerRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -54,9 +56,17 @@ class CustomerServiceImplTest {
     }
 
     @Test
-    void findCustomerById() {
+    void findCustomerById() throws CustomerNotFoundException {
         when(customerRepository.findById(any())).thenReturn(Optional.ofNullable(customer));
         assertEquals(customer, customerService.findCustomerById(UUID.randomUUID()));
+    }
+
+    @Test
+    public void getDemoNotFound(){
+        when(customerRepository.findById(UUID.fromString("587377f9-d630-4363-a9cf-bcd9acd3846d")))
+                .thenReturn(Optional.empty());
+        assertThrows(CustomerNotFoundException.class,
+                () -> customerService.findCustomerById(UUID.fromString("587377f9-d630-4363-a9cf-bcd9acd3846d")));
     }
 
     @Test
