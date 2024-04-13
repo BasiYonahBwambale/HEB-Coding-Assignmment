@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyString;
 
 @WebMvcTest
 class CustomerControllerImplTest {
@@ -57,7 +58,15 @@ class CustomerControllerImplTest {
     }
 
     @Test
-    void findCustomerByCity() {
+    void findCustomerByCity() throws Exception {
+        Mockito.when(customerService.findCustomerByCity(anyString())).thenReturn(List.of(customer));
+        mockMvc.perform(
+                        MockMvcRequestBuilders.get("/customers/" + "Edison")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .accept(MediaType.APPLICATION_JSON)
+                ).andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json(objectMapper.writeValueAsString(List.of(customer))))
+                .andReturn();
     }
 
     @Test
