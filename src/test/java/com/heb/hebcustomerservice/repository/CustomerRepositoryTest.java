@@ -17,13 +17,13 @@ class CustomerRepositoryTest {
     @BeforeEach
     public void SetUp(){
         customer = Customer.builder()
-                .customerId(UUID.randomUUID())
-                .firstName("Leah")
-                .lastName("Mbambu")
-                .emailAddress("lmbambu@domain.com")
-                .state("Texas")
-                .city("Georgetown")
-                .zip("078562")
+                .customerId(UUID.fromString("7db51f02-9086-4797-a0c6-ce56ae5af5fe"))
+                .firstName("Bruce")
+                .lastName("Underson")
+                .emailAddress("bruceunderson@gmail.com")
+                .state("NewJersey")
+                .city("Piscatway")
+                .zip("08845")
                 .build();
     }
     @Test
@@ -33,13 +33,16 @@ class CustomerRepositoryTest {
 
     @Test
     void findCustomerByCity() {
+        assertEquals(2, customerRepository.findCustomerByCity("Edison").size());
     }
 
     @Test
     void findCustomerById() {
+        assertEquals(customer, customerRepository.findById(UUID.fromString("7db51f02-9086-4797-a0c6-ce56ae5af5fe")).get());
     }
 
     @Test
     void createCustomer() {
+        assertEquals(customer, customerRepository.save(customer) );
     }
 }

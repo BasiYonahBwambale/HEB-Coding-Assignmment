@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import java.util.UUID;
 
 class CustomerServiceImplTest {
-
-
     private Customer customer;
     @BeforeEach
     public void SetUp(){
