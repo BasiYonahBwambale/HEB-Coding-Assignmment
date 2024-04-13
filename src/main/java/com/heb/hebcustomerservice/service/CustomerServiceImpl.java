@@ -2,14 +2,13 @@ package com.heb.hebcustomerservice.service;
 
 import com.heb.hebcustomerservice.entity.Customer;
 import com.heb.hebcustomerservice.repository.CustomerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 @Service
 public class CustomerServiceImpl implements CustomerService{
-    private CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
 private CustomerServiceImpl(CustomerRepository customerRepository){
     this.customerRepository = customerRepository;
 }
