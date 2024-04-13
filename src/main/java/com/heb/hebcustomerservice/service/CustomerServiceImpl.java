@@ -30,6 +30,6 @@ private CustomerServiceImpl(CustomerRepository customerRepository){
 
     @Override
     public Customer createCustomer(Customer customer) {
-        return null;
+        return customerRepository.save(customer);
     }
 }
