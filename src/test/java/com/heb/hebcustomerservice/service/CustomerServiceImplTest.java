@@ -48,7 +48,7 @@ class CustomerServiceImplTest {
     void findCustomerByCity() {
         List<Customer> customers = Arrays.asList(customer);
         when(customerRepository.findCustomerByCity(anyString())).thenReturn(customers);
-        assertEquals(customers, customerService.findAllCustomers());
+        assertEquals(customers, customerService.findCustomerByCity("Piscatway"));
     }
 
     @Test

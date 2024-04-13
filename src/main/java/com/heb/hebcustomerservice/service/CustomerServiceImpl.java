@@ -20,7 +20,7 @@ private CustomerServiceImpl(CustomerRepository customerRepository){
 
     @Override
     public List<Customer> findCustomerByCity(String city) {
-        return null;
+        return customerRepository.findCustomerByCity(city);
     }
 
     @Override
