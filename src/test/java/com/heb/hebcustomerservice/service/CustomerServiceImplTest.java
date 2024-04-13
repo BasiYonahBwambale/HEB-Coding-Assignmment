@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -45,6 +46,9 @@ class CustomerServiceImplTest {
 
     @Test
     void findCustomerByCity() {
+        List<Customer> customers = Arrays.asList(customer);
+        when(customerRepository.findCustomerByCity(anyString())).thenReturn(customers);
+        assertEquals(customers, customerService.findAllCustomers());
     }
 
     @Test
