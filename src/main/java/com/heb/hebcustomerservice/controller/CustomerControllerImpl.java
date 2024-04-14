@@ -3,6 +3,7 @@ package com.heb.hebcustomerservice.controller;
 import com.heb.hebcustomerservice.entity.Customer;
 import com.heb.hebcustomerservice.exception.CustomerNotFoundException;
 import com.heb.hebcustomerservice.service.CustomerServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +38,7 @@ public class CustomerControllerImpl implements CustomerController {
     @GetMapping(
             value="/{customerId}",
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Customer> findCustomerById(@PathVariable UUID customerId) throws CustomerNotFoundException {
+    public ResponseEntity<Customer> findCustomerById(@PathVariable @Valid UUID customerId) throws CustomerNotFoundException {
         return ResponseEntity.ok(customerService.findCustomerById(customerId));
     }
 
@@ -45,7 +46,7 @@ public class CustomerControllerImpl implements CustomerController {
     @PostMapping(
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
+    public ResponseEntity<Customer> createCustomer(@RequestBody @Valid Customer customer) {
         return ResponseEntity.ok(customerService.createCustomer(customer));
     }
 }
