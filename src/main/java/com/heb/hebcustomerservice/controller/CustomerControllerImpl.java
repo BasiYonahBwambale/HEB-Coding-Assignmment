@@ -27,26 +27,20 @@ public class CustomerControllerImpl implements CustomerController {
     }
 
     @Override
-    @GetMapping(
-            value="/city/{cityName}",
-            produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<List<Customer>> findCustomerByCity(@PathVariable String cityName) {
-        return ResponseEntity.ok(customerService.findCustomerByCity(cityName));
+    @GetMapping(params = "city")
+    public ResponseEntity<List<Customer>> findCustomerByCity(@RequestParam String city) {
+        return ResponseEntity.ok(customerService.findCustomerByCity(city));
     }
 
     @Override
-    @GetMapping(
-            value="/{customerId}",
-            produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value="/{customerId}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Customer> findCustomerById(@PathVariable @Valid UUID customerId) throws CustomerNotFoundException {
         return ResponseEntity.ok(customerService.findCustomerById(customerId));
     }
 
     @Override
-    @PostMapping(
-            consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Customer> createCustomer(@RequestBody @Valid Customer customer) {
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE},produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<Customer> createCustomer(@Valid @RequestBody Customer customer) {
         return ResponseEntity.ok(customerService.createCustomer(customer));
     }
 }

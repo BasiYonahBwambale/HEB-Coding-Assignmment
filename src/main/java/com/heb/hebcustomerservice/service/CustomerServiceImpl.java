@@ -20,7 +20,9 @@ private CustomerServiceImpl(CustomerRepository customerRepository){
 
     @Override
     public List<Customer> findCustomerByCity(String city) {
-        return customerRepository.findCustomerByCity(city);
+        city = city.replaceAll("\"", "");
+        List<Customer> customersByCity = customerRepository.findCustomerByCity(city);
+        return customersByCity;
     }
 
     @Override
