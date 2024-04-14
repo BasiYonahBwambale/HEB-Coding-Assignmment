@@ -3,13 +3,13 @@ package com.heb.hebcustomerservice.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 
 import java.util.UUID;
 
@@ -46,6 +46,7 @@ public class Customer {
 
     @Column(name= "zip")
     @NotBlank(message = "Invalid zip code")
+    @Size(max = 6)
     private String zip;
 
 }

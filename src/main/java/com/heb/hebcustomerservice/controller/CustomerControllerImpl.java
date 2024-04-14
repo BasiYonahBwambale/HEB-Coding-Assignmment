@@ -3,10 +3,10 @@ package com.heb.hebcustomerservice.controller;
 import com.heb.hebcustomerservice.entity.Customer;
 import com.heb.hebcustomerservice.exception.CustomerNotFoundException;
 import com.heb.hebcustomerservice.service.CustomerServiceImpl;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import javax.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,7 +40,7 @@ public class CustomerControllerImpl implements CustomerController {
 
     @Override
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE},produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Customer> createCustomer(@Valid @RequestBody Customer customer) {
+    public ResponseEntity<Customer> createCustomer(@RequestBody @Valid Customer customer) {
         return ResponseEntity.ok(customerService.createCustomer(customer));
     }
 }
