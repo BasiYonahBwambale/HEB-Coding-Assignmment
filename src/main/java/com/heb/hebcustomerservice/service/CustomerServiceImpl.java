@@ -1,6 +1,8 @@
 package com.heb.hebcustomerservice.service;
 
 import com.heb.hebcustomerservice.entity.Customer;
+import com.heb.hebcustomerservice.exception.BadRequestException;
+import com.heb.hebcustomerservice.exception.CustomerAlreadyExistsException;
 import com.heb.hebcustomerservice.exception.CustomerNotFoundException;
 import com.heb.hebcustomerservice.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,9 @@ private CustomerServiceImpl(CustomerRepository customerRepository){
     public List<Customer> findCustomerByCity(String city) {
         city = city.replaceAll("\"", "");
         List<Customer> customersByCity = customerRepository.findCustomerByCity(city);
+        if(customersByCity.isEmpty()){
+            throw new BadRequestException("No Such a City");
+        }
         return customersByCity;
     }
 
@@ -33,6 +38,16 @@ private CustomerServiceImpl(CustomerRepository customerRepository){
 
     @Override
     public Customer createCustomer(Customer customer) {
-        return customerRepository.save(customer);
+        Customer existingCustomer
+                = customerRepository.findById(customer.getCustomerId())
+                .orElse(null);
+        Customer savedCustomer;
+        if (existingCustomer == null) {
+            savedCustomer =   customerRepository.save(customer);
+            return savedCustomer;
+        }
+        else
+            throw new CustomerAlreadyExistsException(
+                    "Customer already exists in Database!!");
     }
 }

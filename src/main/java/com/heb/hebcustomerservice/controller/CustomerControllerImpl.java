@@ -1,9 +1,12 @@
 package com.heb.hebcustomerservice.controller;
 
 import com.heb.hebcustomerservice.entity.Customer;
+import com.heb.hebcustomerservice.exception.CustomerAlreadyExistsException;
 import com.heb.hebcustomerservice.exception.CustomerNotFoundException;
+import com.heb.hebcustomerservice.exception.ErrorResponse;
 import com.heb.hebcustomerservice.service.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import javax.validation.Valid;
